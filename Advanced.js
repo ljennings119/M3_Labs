@@ -1,66 +1,63 @@
 //Question 1:
 //a
-// function makeCounter() { 
-//     let currentCount = 0; 
+// function makeCounter() {
+//     let currentCount = 0;
 
-//     return function() { 
-//         currentCount++; 
+//     return function() {
+//         currentCount++;
 //         console.log(currentCount);
-//         return currentCount; 
-//     }; 
+//         return currentCount;
+//     };
 // }
 
 // let counter1 = makeCounter();
-// let counter2 = makeCounter(); 
+// let counter2 = makeCounter();
 
-// counter1(); 
-// counter1(); 
+// counter1();
+// counter1();
 
-// counter2(); 
-// counter2(); 
-
+// counter2();
+// counter2();
 
 //b
-// function makeCounter(startFrom) { 
-//     let currentCount = startFrom; 
+// function makeCounter(startFrom) {
+//     let currentCount = startFrom;
 
-//     return function() { 
-//         currentCount++; 
+//     return function() {
+//         currentCount++;
 //         console.log(currentCount);
-//         return currentCount; 
-//     }; 
+//         return currentCount;
+//     };
 // }
 
 // let counter1 = makeCounter(0);
 // let counter2 = makeCounter(10);
 
-// counter1(); 
-// counter1(); 
+// counter1();
+// counter1();
 
-// counter2(); 
-// counter2(); 
-
+// counter2();
+// counter2();
 
 //c
-// function makeCounter(startFrom, incrementBy) { 
-//     let currentCount = startFrom; 
+// function makeCounter(startFrom, incrementBy) {
+//     let currentCount = startFrom;
 
-//     return function() { 
-//         currentCount += incrementBy; 
+//     return function() {
+//         currentCount += incrementBy;
 //         console.log(currentCount);
-//         return currentCount; 
-//     }; 
+//         return currentCount;
+//     };
 // }
 
-// let counter1 = makeCounter(0, 1);   
-// let counter2 = makeCounter(10, 5);  
+// let counter1 = makeCounter(0, 1);
+// let counter2 = makeCounter(10, 5);
 
 // counter1();
-// counter1(); 
+// counter1();
 
-// counter2(); 
-// counter2(); 
-
+// counter2();
+// counter2();
 
 //Question 2:
 //a - # 3 print first and then # 4 will print right after because it doesn't matter if you put 0ms or leave it blank, then #2 then #1. the code is read in order.
@@ -86,8 +83,6 @@
 // setTimeout(delayMsg, 11000, "Delayed by 11 seconds")
 // clearTimeout(fifthTest)
 
-
-
 //Question 3:
 // //c
 // function printMe(msg) {
@@ -110,8 +105,6 @@
 // setTimeout(() => printMe('#1'), 100)
 // setTimeout(() => printMe('#2'), 200)
 // setTimeout(() => printMe('#3'), 300)
-
-
 
 //Question 4:
 //a
@@ -166,8 +159,6 @@
 
 // printFibonacci(10)
 
-
-
 //Question 5:
 // setTimeout is not calling the object anymore because it's no longer tied to the car
 //a
@@ -201,8 +192,6 @@
 // setTimeout(newerCar.description, 200)
 // setTimeout(car.description, 200)
 
-
-
 //Question 6:
 //a
 // function multiply(a, b) {
@@ -210,15 +199,14 @@
 // }
 
 // Function.prototype.delay = function (ms) {
-//   const originalFunction = this; 
+//   const originalFunction = this;
 
 //   return function (a, b) {
 //     setTimeout(() => originalFunction(a, b), ms);
 //   };
 // };
 
-
-// multiply.delay(500)(5, 5); 
+// multiply.delay(500)(5, 5);
 
 //b
 // Function.prototype.delay = function (ms) {
@@ -236,12 +224,215 @@
 //   console.log(a * b * c * d);
 // }
 
-
-// multiply.delay(1000)(2, 3, 4, 5); 
-
-
+// multiply.delay(1000)(2, 3, 4, 5);
 
 //Question 7:
+// class DigitalClock {
+//   constructor(prefix) {
+//     this.prefix = prefix;
+//   }
+//   display() {
+//     let date = new Date();
+//     //create 3 variables in one go using array destructuring
+//     let [hours, mins, secs] = [
+//       date.getHours(),
+//       date.getMinutes(),
+//       date.getSeconds(),
+//     ];
+
+//     if (hours < 10) hours = "0" + hours;
+//     if (mins < 10) mins = "0" + mins;
+//     if (secs < 10) secs = "0" + secs;
+//     console.log(`${this.prefix} ${hours}:${mins}:${secs}`);
+//   }
+//   stop() {
+//     clearInterval(this.timer);
+//   }
+//   start() {
+//     this.display();
+//     this.timer = setInterval(() => this.display(), 1000);
+//   }
+// }
+// const myClock = new DigitalClock("my clock:");
+// myClock.start();
+
+// //a
+// class PrecisionClock extends DigitalClock {
+//   constructor(prefix, precision = 1000) {
+//     super(prefix)
+//     this.precision = precision
+//   }
+
+// start() {
+//     this.display();
+//     this.timer = setInterval(() => this.display(), this.precision);
+//   }
+// }
+
+// //b
+// class AlarmClock extends DigitalClock {
+//   constructor(prefix, wakeupTime = '07:00') {
+//     super(prefix);
+//     this.wakeupTime = wakeupTime;
+//   }
+
+//   display() {
+//     let date = new Date();
+//     let [hours, mins, secs] = [date.getHours(), date.getMinutes(), date.getSeconds()];
+
+//     if (hours < 10) hours = '0' + hours;
+//     if (mins < 10) mins = '0' + mins;
+//     if (secs < 10) secs = '0' + secs;
+
+//     const currentTime = `${hours}:${mins}`;
+//     console.log(`${this.prefix} ${hours}:${mins}:${secs}`);
+
+//     if (currentTime === this.wakeupTime) {
+//       console.log(' Wake Up!');
+//       this.stop();
+//     }
+//   }
+// }
+
+//Question 8:
+// a
+// function validateStringArg(fn) {
+
+//   return function (...args) {
+//     // c
+//     for (let arg of args) {
+//       if (typeof arg !== "string") {
+//         throw new Error(`Invalid argument: "${arg}" is not a string.`);
+//       }
+//     }
+
+//     return fn(...args);
+//   };
+// }
+
+// // b
+// function orderItems(...itemNames) {
+//   return `Order placed for: ${itemNames.join(", ")}`;
+// }
+
+// const validatedOrderItem = validateStringArg(orderItems);
+
+// // d
+// try {
+//   console.log(validatedOrderItem("Apple Watch", "iPhone", "AirPods"));
+// } catch (error) {
+//   console.error(error.message);
+// }
+
+// try {
+//   console.log(validatedOrderItem("MacBook", 123, "iPad"));
+// } catch (error) {
+//   console.error(error.message);
+// }
+
+//Question 9:
+// function randomDelay() {
+//   return new Promise((resolve, reject) => {
+//     // a
+//     const delay = Math.floor(Math.random() * 20) + 1; // in seconds
+
+//     setTimeout(() => {
+//       // b
+//       if (delay % 2 === 0) {
+//         resolve(delay);
+//       } else {
+//         reject(delay);
+//       }
+//     }, delay * 1000);
+//   });
+// }
+
+// // c & d
+// randomDelay()
+//   .then((delay) => {
+//     console.log(`Success! Delay of ${delay} seconds.`);
+//   })
+//   .catch((delay) => {
+//     console.log(`Failed! Delay of ${delay} seconds.`);
+//   });
+
+//Question 10:
+// run 'npm init' and accept all the defaults
+// run 'npm install node-fetch'
+// run 'npm pkg set type=module'
+// import fetch from "node-fetch";
+// globalThis.fetch = fetch;
+// function fetchURLData(url) {
+//   let fetchPromise = fetch(url).then((response) => {
+//     if (response.status === 200) {
+//       return response.json();
+//     } else {
+//       throw new Error(`Request failed with status ${response.status}`);
+//     }
+//   });
+//   return fetchPromise;
+// }
+
+// fetchURLData("https://jsonplaceholder.typicode.com/todos/1")
+//   .then((data) => console.log(data))
+//   .catch((error) => console.error(error.message));
 
 
+//   //a
+//   async function fetchURLDataAsync(url) {
+//   try {
+//     const response = await fetch(url);
+//     if (response.status === 200) {
+//       const data = await response.json();
+//       return data;
+//     } else {
+//       throw new Error(`Request failed with status ${response.status}`);
+//     }
+//   } catch (error) {
+//     throw new Error(`Fetch error: ${error.message}`);
+//   }
+// }
 
+// //b
+// fetchURLData("https://jsonplaceholder.typicode.com/todos/1")
+//   .then((data) => console.log(" .then version success:", data))
+//   .catch((error) => console.error(" .then version error:", error.message));
+
+
+// fetchURLData("https://jsonplaceholder.typicode.com/invalid-url")
+//   .then((data) => console.log(" .then version success:", data))
+//   .catch((error) => console.error(" .then version error:", error.message));
+
+
+// //c
+// async function fetchMultipleURLs(urls) {
+//   try {
+//     const results = await Promise.all(
+//       urls.map(async (url) => {
+//         const response = await fetch(url);
+//         if (response.status === 200) {
+//           return response.json();
+//         } else {
+//           throw new Error(`Request failed with status ${response.status} for URL: ${url}`);
+//         }
+//       })
+//     );
+//     return results;
+//   } catch (error) {
+//     throw new Error(`Error fetching multiple URLs: ${error.message}`);
+//   }
+// }
+// (async () => {
+//   const urls = [
+//     "https://jsonplaceholder.typicode.com/todos/1",
+//     "https://jsonplaceholder.typicode.com/todos/2",
+//     "https://jsonplaceholder.typicode.com/bad-endpoint" 
+//   ];
+
+//   try {
+//     const allData = await fetchMultipleURLs(urls);
+//     console.log(" Multiple fetch success:", allData);
+//   } catch (error) {
+//     console.error(" Multiple fetch error:", error.message);
+//   }
+// })();
